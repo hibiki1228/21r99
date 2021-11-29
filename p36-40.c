@@ -50,10 +50,10 @@ int p36_test(void) {
 
 
 // 37. [問題変更] 230を超えない2番目に大きい素数は何か？
-int max2_prime_under(int n) {
+int p37(int n) {
   int prime = 0, prime2;
 
-  for (int i = 1; i <= n; i++) {
+  for (int i = 1; i < n; i++) {
     prime2 = prime;
     if (is_prime(i)) {
       prime = i;
@@ -64,9 +64,12 @@ int max2_prime_under(int n) {
 }
 
 // test code
+// added 2021-11-21
 int p37_test(void) {
-  return max2_prime_under(11) == 7 &&
-    max2_prime_under(1001) == 997;
+  return  p37(10) == 5 &&
+    p37(power(2,10)) == 1019 &&
+    p37(power(2,20)) == 1048571 &&
+    p37(power(2,30)) == 1073741783;
 }
 
 // 38. 4 番目までの素数を足すと 2 + 3 + 5 + 7 = 17.1000 番目までの素数の和を求めなさい。それはたぶん 3682913. 
@@ -131,13 +134,16 @@ int p40_test(void) {
   return 1;
 }
 
-
 int main(void) {
   printf("Problem 36\n");
   printf("%d\n", p36_test());
 
   printf("Problem 37\n");
   printf("%d\n", p37_test());
+  printf("%d\n", p37(10));
+  printf("%d\n", p37(power(2,10)));
+  printf("%d\n", p37(power(2,20)));
+  printf("%d\n", p37(power(2,30)));
   
   printf("Problem 38\n");
   printf("%d\n", p38_test());
