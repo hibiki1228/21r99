@@ -143,7 +143,7 @@ int main(void) {
   printf("%d\n", p37(10));
   printf("%d\n", p37(power(2,10)));
   printf("%d\n", p37(power(2,20)));
-  printf("%d\n", p37(power(2,30)));
+  // printf("%d\n", p37(power(2,30)));
   
   printf("Problem 38\n");
   printf("%d\n", p38_test());
