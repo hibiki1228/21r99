@@ -1,6 +1,27 @@
 #include <stdio.h>
 
 // 51. 3 桁の整数の桁を入れ替えた整数を返す関数int rev3(int n).例えば rev(314) の戻り値は 413 になる。310 は 13 だな。 
+int rev3(int n) {
+  int rev = 0;
+  int count = 0;
+  int num = n;    
+  int ad;
+
+  while (num != 0) {
+    num /= 10;
+    count++;
+  }
+
+  for (int i = 10; n % i != 0; i *= 10) {
+    for (int j = count; j > 0; j--) {
+        ad *= 10;
+    }
+    rev += n % i * ad;
+    count--;
+  }
+
+  return rev;
+}
 
 // 52. rev3(n) が元の整数 n と等しくなる3桁の整数は何個あるかを返す関数int how_many_rev3(void). 
 
@@ -13,7 +34,7 @@
 
 int main(void) {
   printf("Problem 51\n");
-
+  printf("%d\n", rev3(312)); 
   printf("Problem 52\n");
   
   printf("Problem 53\n");
