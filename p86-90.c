@@ -14,7 +14,7 @@ int str_eql(char* s1, char* s2) {
 }
 
 // 86. 文字列 s1 を文字列 s2 にコピーする関数void str_copy(char* s1, char* s2).s2 は s1 をコピーするに十分な長さがあると仮定してよい。以下同様。str_copy(s1,s2) の実行後、str_sql(s1, s2) が真になること。 
-char * str_copy(char* s2, char* s1) {
+char * str_copy(char* s1, char* s2) {
   int i;
   
   for (i=0; s1[i]!='\0'||s2[i]!='\0'; i++) {
