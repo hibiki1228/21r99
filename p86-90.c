@@ -18,7 +18,7 @@ char * str_copy(char* s2, char* s1) {
   int i;
   
   for (i=0; s1[i]!='\0'||s2[i]!='\0'; i++) {
-    s2[i] = s1[i];
+    s1[i] = s2[i];
   }
   return s1;
 }
@@ -169,9 +169,52 @@ int str_search_test(void) {
     str_search(s1, "long long long long long string") == -1;
 }
 
-// 89. 文字列 s1 の n 文字目からの m 文字を削除するchar* str_remove(char* s1, int n, int m). 戻り値は s1.s1="0123456789" として、str_remove(s1, 5,3) の後、s1 は "0123489" になる。s1 を書き換えない、安全なバージョンにも挑戦しよう。 
+// 89. 文字列 s1 の n 文字目からの m 文字を削除するchar* str_remove(char* s1, int n, int m). 戻り値は s1.s1="0123456789" として、str_remove(s1, 5,3) の後、s1 は "0123489" になる。s1 を書き換えない、安全なバージョンにも挑戦しよう。
+char* str_remove(char* s1, int n, int m) {
+  int i;
+
+  for (i=n; s1[i]!='\0' ; i++) {
+    s1[i] = s1[i+m];
+  }
+  s1[i + m]  = '\0';
+  return s1;
+} 
+
+int str_remove_test(void) {
+  char s1[] = "0123456789";
+  return str_eql(str_remove(s1, 5,3), "0123489");
+}
 
 // 90. 文字列 s1 の n 文字目に文字列 s2 を挿入するchar* str_insert(char* s1, int n, char* s2).戻り値は挿入後の文字列（ポインタ）。printf("%s\n", str_insert("012345", 3, "abc")) は0123abc45 を印字する。 
+char* str_insert(char* s1, int n, char* s2){
+  int total_len = str_len(s1) + str_len(s2);
+  char* ans_str = (char*)malloc(sizeof(char) * total_len);
+
+  int i;
+  for(i=0; i<n; i++){
+    ans_str[i] = s1[i];
+  }
+  for(i=0; s2[i]!='\0'; i++){
+    ans_str[n + i] = s2[i];
+  }
+  for(i=n; s1[i]!='\0'; i++){
+    ans_str[str_len(s2) + i - 1] = s1[i];
+  }
+  ans_str[total_len - 1] = '\0';
+  return ans_str;
+}
+
+
+int str_insert_test(void) {
+  char s1[100] = "012345";
+  return str_eql(str_insert(s1, 3, "abc"), "012abc345") &&
+    str_copy(s1, "012345") &&
+    str_eql(str_insert(s1, 0, "!"), "!012345") &&
+    str_copy(s1, "012345") &&
+    str_eql(str_insert(s1, 6, "zzz"), "012345zzz") &&
+    str_copy(s1, "012345") &&
+    str_eql(str_insert(s1, 100, "xyz"), s1);
+}
 
 
 int main(void) {
@@ -187,10 +230,10 @@ int main(void) {
   printf("%d\n", str_search_test());
 
   printf("Problem 89\n");
-  // printf("%d\n", ());
+  printf("%d\n", str_remove_test());
 
   printf("Problem 90\n");
-  // printf("%d\n", ());
+  printf("%d\n", str_insert_test());
 
   return 0;
 }
